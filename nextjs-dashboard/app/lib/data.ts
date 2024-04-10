@@ -54,6 +54,7 @@ export async function fetchLatestInvoices() {
 }
 
 export async function fetchCardData() {
+  noStore();
   try {
     // You can probably combine these into a single SQL query
     // However, we are intentionally splitting them to demonstrate
@@ -125,6 +126,7 @@ export async function fetchFilteredInvoices(
 }
 
 export async function fetchInvoicesPages(query: string) {
+  noStore();
   try {
     const count = await sql`SELECT COUNT(*)
     FROM invoices
@@ -146,6 +148,7 @@ export async function fetchInvoicesPages(query: string) {
 }
 
 export async function fetchInvoiceById(id: string) {
+  noStore();
   try {
     const data = await sql<InvoiceForm>`
       SELECT
@@ -163,6 +166,7 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    console.log(invoice);
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -171,6 +175,7 @@ export async function fetchInvoiceById(id: string) {
 }
 
 export async function fetchCustomers() {
+  noStore();     
   try {
     const data = await sql<CustomerField>`
       SELECT
@@ -189,6 +194,7 @@ export async function fetchCustomers() {
 }
 
 export async function fetchFilteredCustomers(query: string) {
+  noStore();
   try {
     const data = await sql<CustomersTableType>`
 		SELECT
